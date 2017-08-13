@@ -2,6 +2,32 @@
 
 @section('content')
 <div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Requests</div>
+            <div class="panel-body">
+                <center>
+                    <span style="font-size: 75px;">
+                        {{ \ConsoleTVs\Support\Helpers::materialRound($link->views->count()) }}
+                    </span>
+                </center>
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Visitas</div>
+            <div class="panel-body">
+                <center>
+                    <span style="font-size: 75px;">
+                        {{ \ConsoleTVs\Support\Helpers::materialRound($link->views->unique('ip')->count()) }}
+                    </span>
+                </center>
+                <br />
+            </div>
+        </div>
+    </div>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">Navegadores</div>
