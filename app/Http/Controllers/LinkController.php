@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Charts;
 use App\Link;
 use Identify;
 use ConsoleTVs\Support\Helpers;
 use App\Http\Requests\CreateLink;
-use Charts;
 
 class LinkController extends Controller
 {
@@ -78,28 +78,31 @@ class LinkController extends Controller
             abort(404);
         }
 
-        $requests_chart = Charts::database($link->views, 'line', 'highcharts')
+        $views = $link->views()->with('link')->get();
+
+        $requests_chart = Charts::database($views, 'line', 'highcharts')
             ->title("Requests")
             ->dimensions(0, 400)
             ->lastByday(date('m'), date('Y'), true);
 
-        $views_chart = Charts::database($link->views->unique('ip'), 'line', 'highcharts')
+        $views_chart = Charts::database($views->unique('ip'), 'line', 'highcharts')
             ->title("Visitas")
             ->dimensions(0, 400)
             ->lastByday(date('m'), date('Y'), true);
 
-        $browsers_chart = Charts::database($link->views, 'pie', 'highcharts')
+        $browsers_chart = Charts::database($views, 'pie', 'highcharts')
             ->groupBy('browser');
 
-        $os_chart = Charts::database($link->views, 'pie', 'highcharts')
+        $os_chart = Charts::database($views, 'pie', 'highcharts')
             ->groupBy('os');
 
-        $lang_chart = Charts::database($link->views, 'pie', 'highcharts')
+        $lang_chart = Charts::database($views, 'pie', 'highcharts')
             ->groupBy('lang');
 
         return view('statistics', compact([
             'link', 'requests_chart', 'views_chart',
-            'browsers_chart', 'os_chart', 'lang_chart'
+            'browsers_chart', 'os_chart', 'lang_chart',
+            'views'
         ]));
     }
 }

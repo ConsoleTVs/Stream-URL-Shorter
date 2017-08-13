@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Unicodeveloper\Identify\IdentifyServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 

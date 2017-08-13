@@ -2,13 +2,24 @@
 
 @section('content')
 <div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Usuario</div>
+            <div class="panel-body">
+                <ul>
+                    <li>Nombre: {{ $link->user->name }}</li>
+                    <li>Email: {{ $link->user->email }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">Requests</div>
             <div class="panel-body">
                 <center>
                     <span style="font-size: 75px;">
-                        {{ \ConsoleTVs\Support\Helpers::materialRound($link->views->count()) }}
+                        {{ \ConsoleTVs\Support\Helpers::materialRound($views->count()) }}
                     </span>
                 </center>
                 <br />
@@ -21,7 +32,7 @@
             <div class="panel-body">
                 <center>
                     <span style="font-size: 75px;">
-                        {{ \ConsoleTVs\Support\Helpers::materialRound($link->views->unique('ip')->count()) }}
+                        {{ \ConsoleTVs\Support\Helpers::materialRound($views->unique('ip')->count()) }}
                     </span>
                 </center>
                 <br />
